@@ -5,7 +5,10 @@ export default {
     extend: {
       colors: {
         'primary-bg' : '#46535b'
-      }
+      },
+      fontFamily: {
+        sans: ['Space Grotesk']
+      },
     },
   },
   plugins: [require('daisyui'),],
