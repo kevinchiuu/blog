@@ -1,4 +1,9 @@
+# file gives us the links to our posts
+post-hashes.txt
+
 node_modules
+
+package-lock.json
 
 # Output
 .output
