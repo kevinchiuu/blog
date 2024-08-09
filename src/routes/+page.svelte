@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <div class="bg-primary-bg h-screen text-white flex flex-col flex-grow">
     <div class="pt-[4%] mx-[20%]">
 

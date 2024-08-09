@@ -1,3 +1,4 @@
+import { generateShortHash } from '$lib/utils';
 import { createHash } from 'crypto';
 import fs from 'fs/promises';
 import path from 'path';
@@ -15,7 +16,7 @@ export async function load({ params }) {
     for (const filename of files) {
       const filePath = path.join(postsDirectory, filename);
       const content = await fs.readFile(filePath, 'utf-8');
-      const hash = createHash('sha256').update(content).digest('hex');
+      const hash = generateShortHash(content)
       
       console.log(`Hash for ${filename}:`, hash);
       

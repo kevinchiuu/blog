@@ -10,10 +10,18 @@ export async function generatePostHashes() {
     files.map(async (filename) => {
       const filePath = path.join(postsDirectory, filename);
       const content = await fs.readFile(filePath, 'utf-8');
-      const hash = createHash('sha256').update(content).digest('hex');
+      const hash = generateShortHash(content);
       return { filename, hash };
     })
   );
 
   return hashes;
+}
+
+export function generateShortHash(content, length = 12) {
+  // Use SHA-256 for a good balance of speed and collision resistance
+  const fullHash = createHash('sha256').update(content).digest('hex');
+  
+  // Take the first 'length' characters of the hash
+  return fullHash.slice(0, length);
 }
