@@ -12,7 +12,6 @@
 
         <div class="grid grid-cols-3 gap-4">
             <div class="col-span-2 ..."> {data.content}</div>
-            <div class="">05</div>
         </div>
     </div>
 </div>
