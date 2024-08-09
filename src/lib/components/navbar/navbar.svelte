@@ -3,7 +3,7 @@
     import settingsIcon from '$lib/icons/settings-icon.png';
   
     let links = [
-      {href: '/', label: 'Stations', rel: 'none'},
+      {href: 'https://stations.wihi.cc', label: 'Stations', rel: 'none'},
       {href: 'https://docs.wihi.cc', label: 'Docs', rel: 'external'}
     ];
   
