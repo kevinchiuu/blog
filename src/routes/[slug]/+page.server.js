@@ -18,7 +18,7 @@ export async function load({ params }) {
   if (file) {
     try {
       
-      let postPath = path.join(process.cwd(), 'src', 'posts', `${file}`);
+      let postPath = path.join(process.cwd(), `${file}`);
 
       const post = await import(postPath);
 
