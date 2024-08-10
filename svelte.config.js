@@ -16,7 +16,7 @@ const config = {
 			runtime: 'nodejs20.x',
 		}),
 		alias: {
-			'@posts': path.resolve('./src/posts'),
+			'@posts': path.resolve('./static/posts'),
 		}
 	}
 };

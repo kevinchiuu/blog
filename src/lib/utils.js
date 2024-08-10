@@ -8,13 +8,13 @@ export function generateShortHash(content, length = 12) {
 
 // TODO: change this to a "content / posts" folder not in the src directory
 export async function getMarkdownFiles() {
-  const postsDirectory = path.join(process.cwd(), 'src', 'posts');
+  const postsDirectory = path.join(process.cwd(), 'static', 'posts');
   const files = await fs.readdir(postsDirectory);
   return files.filter(file => file.endsWith('.md'));
 }
 
 export async function getRawMarkdownContent(filename) {
-  const filePath = path.join(process.cwd(), 'src', 'posts', filename);
+  const filePath = path.join(process.cwd(), 'static', 'posts', filename);
   return await fs.readFile(filePath, 'utf-8');
 }
 

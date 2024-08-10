@@ -3,7 +3,7 @@ import path from 'path';
 import crypto from 'crypto';
 
 async function generateContentMap() {
-  const postsDir = path.join(process.cwd(), 'src', 'posts');
+  const postsDir = path.join(process.cwd(), 'static', 'posts');
   console.log('Posts directory:', postsDir);
 
   const files = await fs.readdir(postsDir);
