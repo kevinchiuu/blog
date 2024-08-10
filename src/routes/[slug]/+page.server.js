@@ -1,35 +1,42 @@
-import { generateShortHash } from '$lib/utils';
+import { generateShortHash, getRawMarkdownContent } from '$lib/utils';
 import { createHash } from 'crypto';
 import fs from 'fs/promises';
 import path from 'path';
 
+import { error } from '@sveltejs/kit';
+import { getContentHashes } from '$lib/utils';
+
 export async function load({ params }) {
-  console.log('load() function called with params:', params);
+	const contentHashes = await getContentHashes();
+	const file = Object.keys(contentHashes).find(file => contentHashes[file] === params.slug);
 
-  const postsDirectory = path.join(process.cwd(), 'src', 'posts');
-  console.log('Posts directory:', postsDirectory);
+  console.log("[slug]+page.server.js file:", file);
 
-  try {
-    const files = await fs.readdir(postsDirectory);
-    console.log('Files in posts directory:', files);
+	if (file) {
 
-    for (const filename of files) {
-      const filePath = path.join(postsDirectory, filename);
-      const content = await fs.readFile(filePath, 'utf-8');
-      const hash = generateShortHash(content)
-      
-      console.log(`Hash for ${filename}:`, hash);
-      
-      if (hash === params.slug) {
-        console.log('Match found for:', filename);
-        return { content, filename };
-      }
-    }
-  } catch (err) {
-    console.error('Error in load function:', err);
-    throw error(500, 'Internal Server Error');
-  }
-  
-  console.log('No matching post found');
-  throw error(404, 'Post not found');
+    console.log("[slug]+page.server.js inside the (file)?")
+
+		const post = await import(`../../posts/${file}`);
+
+		console.log("post: ", post);
+
+		return {
+			content: post.default.render(),
+			metadata: post.metadata
+		}
+	}
+
+	throw error(404, 'Post not found');
 }
+
+export async function entries() {
+	const contentHashes = await getContentHashes();
+	return Object.values(contentHashes).map(hash=>({slug: hash}));
+}
+
+load.js = ({ component, metadata }) => {
+	return {
+		component: JSON.parse(JSON.stringify({ $$typeof: 'c' })),
+		metadata
+	};
+};
