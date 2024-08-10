@@ -18,6 +18,16 @@ export async function load({ params }) {
   if (file) {
     try {
       
+      let testPath = path.join(process.cwd(), 'test.js');
+      
+      let fileExists = fs.existsSync(testPath);
+
+      if (fileExists) {
+        console.log('The file exists.');
+      } else {
+        console.log('The file does not exist.');
+      }
+
       let postPath = path.join(process.cwd(), 'src', 'posts', `${file}`);
 
       const post = await import(postPath);
