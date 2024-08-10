@@ -17,6 +17,9 @@ const config = {
 		}),
 		alias: {
 			'@posts': path.resolve('./static/posts'),
+		},
+		files: {
+			assets: 'static'
 		}
 	}
 };

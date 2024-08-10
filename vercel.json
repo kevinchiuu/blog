@@ -1,11 +1,15 @@
 {
-  "buildCommand": "bun run build",
-  "outputDirectory": "build",
-  "framework": "sveltekit",
-  "routes": [
-    {
-      "src": "/[^.]+",
-      "dest": "/"
-    }
-  ]
+    "buildCommand": "bun run build",
+    "outputDirectory": "build",
+    "framework": "sveltekit",
+    "routes":
+    [
+        {
+            "handle": "filesystem"
+        },
+        {
+            "src": "/*",
+            "dest": "/"
+        }
+    ]
 }

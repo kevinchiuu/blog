@@ -8,69 +8,73 @@ import { getContentHashes } from '$lib/utils';
 
 import { contentMap } from '$lib/content-map';
 
-export async function load({ params }) {
+// export async function load({ params }) {
 
-  console.log('Received slug:', params.slug);
-  console.log('Content map:', contentMap);
+//   console.log('Received slug:', params.slug);
+//   console.log('Content map:', contentMap);
 
-  const file = contentMap[params.slug];
+//   const file = contentMap[params.slug];
   
-  if (file) {
-    try {
-      let postPath = path.join(process.cwd(), 'static', `${file}`);
+//   if (file) {
+//     try {
+//       let postPath = path.join(process.cwd(), 'static', `${file}`);
 
-      const post = await import(postPath);
+//       const post = await import(postPath);
 
-      return {
-        content: post.default.render().html,
-        metadata: post.metadata
-      };
-    } catch (e) {
-      console.error(`Error importing blog post: ${file}`, e);
-      throw error(500, 'Error loading blog post');
+//       return {
+//         content: post.default.render().html,
+//         metadata: post.metadata
+//       };
+//     } catch (e) {
+//       console.error(`Error importing blog post: ${file}`, e);
+//       throw error(500, 'Error loading blog post');
+//     }
+//   }
+
+//   throw error(404, 'Post not found');
+// }
+
+// export function entries() {
+//   return Object.keys(contentMap).map(slug => ({ slug }));
+// }
+
+import { processMarkdown } from '$lib/markdown';
+
+export async function load({ params, fetch }) {
+    console.log('Received slug:', params.slug);
+    console.log('Content map:', contentMap);
+
+    const file = Object.entries(contentMap).find(([_, hash]) => hash === params.slug)?.[0];
+    
+    if (file) {
+        console.log('Matching file found:', file);
+        try {
+            // Fetch the Markdown content
+            const response = await fetch(`/posts/${file}`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const markdown = await response.text();
+
+            // Process the Markdown content (you'll need to implement this function)
+            const { content, metadata } = processMarkdown(markdown);
+
+            return {
+                content,
+                metadata
+            };
+        } catch (e) {
+            console.error(`Error loading blog post: ${file}`, e);
+            throw error(500, 'Error loading blog post');
+        }
     }
-  }
 
-  throw error(404, 'Post not found');
+    console.log('No matching file found for slug:', params.slug);
+    throw error(404, 'Post not found');
 }
 
 export function entries() {
-  return Object.keys(contentMap).map(slug => ({ slug }));
+    return Object.values(contentMap).map(hash => ({ slug: hash }));
 }
 
-// export const prerender = true;
-
-// export async function load({ params }) {
-// 	const contentHashes = await getContentHashes();
-// 	const file = Object.keys(contentHashes).find(file => contentHashes[file] === params.slug);
-
-//   console.log("[slug]+page.server.js file:", file);
-
-// 	if (file) {
-
-//     console.log("[slug]+page.server.js inside the (file)?")
-
-// 		const post = await import(`../../posts/${file}`);
-
-// 		console.log("post: ", post);
-
-// 		return {
-// 			content: post.default.render().html,
-// 			metadata: post.metadata
-// 		}
-// 	}
-
-// 	throw error(404, 'Post not found');
-// }
-
-// export async function entries() {
-// 	const contentHashes = await getContentHashes();
-// 	return Object.values(contentHashes).map(hash=>({slug: hash}));
-// }
-
-// load.js = ({ component, metadata }) => {
-// 	return {
-// 		component: JSON.parse(JSON.stringify({ $$typeof: 'c' })),
-// 		metadata
-// 	};
-// };
+export const prerender = true;
