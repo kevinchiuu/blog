@@ -8,36 +8,6 @@ import { getContentHashes } from '$lib/utils';
 
 import { contentMap } from '$lib/content-map';
 
-// export async function load({ params }) {
-
-//   console.log('Received slug:', params.slug);
-//   console.log('Content map:', contentMap);
-
-//   const file = contentMap[params.slug];
-  
-//   if (file) {
-//     try {
-//       let postPath = path.join(process.cwd(), 'static', `${file}`);
-
-//       const post = await import(postPath);
-
-//       return {
-//         content: post.default.render().html,
-//         metadata: post.metadata
-//       };
-//     } catch (e) {
-//       console.error(`Error importing blog post: ${file}`, e);
-//       throw error(500, 'Error loading blog post');
-//     }
-//   }
-
-//   throw error(404, 'Post not found');
-// }
-
-// export function entries() {
-//   return Object.keys(contentMap).map(slug => ({ slug }));
-// }
-
 import { processMarkdown } from '$lib/markdown';
 
 export async function load({ params, fetch }) {
