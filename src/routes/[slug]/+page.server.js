@@ -21,7 +21,7 @@ export async function load({ params }) {
 		console.log("post: ", post);
 
 		return {
-			content: post.default.render(),
+			content: post.default.render().html,
 			metadata: post.metadata
 		}
 	}

@@ -11,8 +11,11 @@
         </div>
 
         <div class="grid grid-cols-3 gap-4">
-            <div class="col-span-2 ..."> dataaa </div>
-			{@html data.content}
+            <!-- <div class="col-span-2 ..."> dataaa </div>
+			{@html data.content} -->
+             <div class="col-span-2 prose prose-invert max-w-none">
+                {@html data.content}
+             </div>
         </div>
     </div>
 </div>
