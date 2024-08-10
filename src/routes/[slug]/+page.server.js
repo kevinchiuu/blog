@@ -17,7 +17,11 @@ export async function load({ params }) {
   
   if (file) {
     try {
-      const post = await import(`../../posts/${file}`);
+      
+      let postPath = path.join(process.cwd(), 'src', 'posts', `${file}`);
+
+      const post = await import(postPath);
+
       return {
         content: post.default.render().html,
         metadata: post.metadata
