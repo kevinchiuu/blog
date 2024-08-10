@@ -4,8 +4,9 @@
 	"private": true,
 	"scripts": {
 		"dev": "vite dev",
-		"build": "bun run generate-hashes && vite build",
+		"build": "bun run generate-content-map && bun run generate-hashes && vite build",
 		"generate-hashes": "bun run src/scripts/generate-hashes.js",
+		"generate-content-map": "bun run src/scripts/generate-content-map.js",
 		"preview": "vite preview",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write ."
