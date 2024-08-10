@@ -18,7 +18,7 @@ async function generateHashes() {
   );
 
   // Write the hashes to a JSON file
-  const hashesPath = path.join(process.cwd(), 'src', 'content-hashes.json');
+  const hashesPath = path.join(process.cwd(), 'static', 'content-hashes.json');
   await fs.writeFile(hashesPath, JSON.stringify(sortedHashes, null, 2));
 
   console.log('Content hashes have been generated and saved to content-hashes.json');

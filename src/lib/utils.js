@@ -19,7 +19,7 @@ export async function getRawMarkdownContent(filename) {
 }
 
 export async function getContentHashes() {
-  const hashesPath = path.join(process.cwd(), 'src', 'content-hashes.json');
+  const hashesPath = path.join(process.cwd(), 'static', 'content-hashes.json');
   try {
     const hashesContent = await fs.readFile(hashesPath, 'utf-8');
     return JSON.parse(hashesContent);
