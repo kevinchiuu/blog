@@ -17,6 +17,12 @@ const config = {
 		}),
 		alias: {
 			'@posts': path.resolve('./src/posts'),
+		},
+		files: {
+			assets: 'static'
+		},
+		vite: {
+			assetsInclude: ['**/*.md']
 		}
 	}
 };
