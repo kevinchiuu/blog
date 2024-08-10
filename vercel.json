@@ -1,16 +1,5 @@
 {
     "buildCommand": "bun run build",
     "outputDirectory": "build",
-    "framework": "sveltekit",
-    "routes":
-    [
-		{ "src": "/favicon.ico", "dest": "/favicon.ico" },
-        {
-            "handle": "filesystem"
-        },
-        {
-            "src": "/*",
-            "dest": "/"
-        }
-    ]
+    "framework": "sveltekit"
 }
