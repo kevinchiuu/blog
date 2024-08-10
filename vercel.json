@@ -4,6 +4,7 @@
     "framework": "sveltekit",
     "routes":
     [
+		{ "src": "/favicon.ico", "dest": "/favicon.ico" },
         {
             "handle": "filesystem"
         },
