@@ -1,0 +1,14 @@
+{
+  "buildCommand": "bun run build",
+  "outputDirectory": "build",
+  "framework": "sveltekit",
+  "includeFiles": [
+    "src/posts/**"
+  ],
+  "routes": [
+    {
+      "src": "/[^.]+",
+      "dest": "/"
+    }
+  ]
+}
