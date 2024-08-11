@@ -3,7 +3,8 @@
 </script>
 
 <div class="bg-primary-bg min-h-screen text-white flex flex-col">
-    <div class="pt-4 md:pt-[4%] px-4 md:px-[10%] lg:px-[20%]">
+    <!-- Add padding-top to account for the navbar height -->
+    <div class="pt-16 md:pt-24 px-4 md:px-[10%] lg:px-[20%]">
         <div class="mb-5">
             <h1 class="text-2xl md:text-3xl lg:text-4xl font-semibold break-words">
                 {data.metadata.title}
